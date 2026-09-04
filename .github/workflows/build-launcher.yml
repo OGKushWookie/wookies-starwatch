@@ -1,0 +1,29 @@
+name: Build portable launcher
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run release checks
+        shell: pwsh
+        run: node "Sync Service/test/release-static.mjs"
+      - name: Build and test one-file launcher
+        shell: pwsh
+        run: ./Source/Build-Portable.ps1 -OutputDirectory ./artifacts
+      - name: Upload unsigned launcher
+        uses: actions/upload-artifact@v4
+        with:
+          name: Wookies-Starwatch-unsigned
+          path: |
+            artifacts/WookiesStarwatch.exe
+            artifacts/SHA256SUMS.txt
+          if-no-files-found: error

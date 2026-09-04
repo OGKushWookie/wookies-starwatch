@@ -1,0 +1,16 @@
+Build/
+artifacts/
+WookiesStarwatch.exe
+*.zip
+SHA256SUMS.txt
+.wrangler/
+node_modules/
+*.download
+*.previous
+*.pfx
+*.p12
+*.pem
+*.key
+.env
+.dev.vars
+update-private.xml

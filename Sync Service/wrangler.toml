@@ -1,0 +1,15 @@
+name = "stellar-odyssey-intel-sync"
+main = "src/index.js"
+compatibility_date = "2026-08-31"
+
+[triggers]
+crons = ["17 3 * * *"]
+
+[assets]
+directory = "./public"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "stellar-odyssey-intel-sync"
+database_id = "eeb6f3df-3c49-4795-a9ff-671edb42faf2"
+migrations_dir = "migrations"

@@ -1,0 +1,17 @@
+{
+  "name": "stellar-odyssey-intel-sync",
+  "version": "1.3.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node test/release-static.mjs",
+    "dev": "wrangler dev",
+    "db:create": "wrangler d1 create stellar-odyssey-intel-sync",
+    "db:migrate:local": "wrangler d1 migrations apply stellar-odyssey-intel-sync --local",
+    "db:migrate:remote": "wrangler d1 migrations apply stellar-odyssey-intel-sync --remote",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "4.35.0"
+  }
+}
