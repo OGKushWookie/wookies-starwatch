@@ -15,7 +15,12 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run release checks
         shell: pwsh
-        run: node "Sync Service/test/release-static.mjs"
+        run: |
+          node "Sync Service/test/release-static.mjs"
+          node "Sync Service/test/perfect-finder.mjs"
+      - name: Test streaming perfect-node index
+        shell: pwsh
+        run: ./Source/Test-PerfectIndex.ps1 -OutputDirectory ./test-artifacts
       - name: Build and test one-file launcher
         shell: pwsh
         run: ./Source/Build-Portable.ps1 -OutputDirectory ./artifacts

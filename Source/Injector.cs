@@ -15,7 +15,7 @@ using System.Diagnostics;
 internal static class Injector
 {
     private static readonly JavaScriptSerializer Json = new JavaScriptSerializer { MaxJsonLength = int.MaxValue };
-    private const string LauncherVersion = "2.1.0";
+    private const string LauncherVersion = "2.2.0";
     private const string UpdateManifestUrl = "https://stellar-odyssey-intel-sync.sthess28.workers.dev/updates/manifest.json";
     private const string UpdateHost = "stellar-odyssey-intel-sync.sthess28.workers.dev";
     private const string UpdatePublicKey = "<RSAKeyValue><Modulus>qdHNT6Oeu2ON9sMOMvvK+C8z/xle21JIMw9dCxVj7b00NSTLzsX1BcBtVfosAyHiDoic5oTjtQZYZMyWS0YHIRvgN30k1AJ5zewcAevVhdcdlIdX0uyDsonY0S6+fJYiIa92jPByNnFMd0kQDJV6yBGaGIivX1TXlsXow0Oi21lwxib+WcgLSXlba9Gnq4yPO/gs/o6Jk5/8PoOIZSDWRw2efoicOxGTltu0+su3AHClZNQaPRhx2sbmAB1AcRK/nq8pDL7goNasoC8LT6bbRBPGKabGIR+X7WbvFbxDMDpHZDAvMPL3bJsHK/sqQgl5BPiGN9UbOttI1loXmOLHzQ==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
@@ -512,7 +512,7 @@ internal sealed class OfficialApiBridge : IDisposable
 {
     private static readonly JavaScriptSerializer Json = new JavaScriptSerializer { MaxJsonLength = int.MaxValue };
     private static readonly byte[] Entropy = Encoding.UTF8.GetBytes("Stellar Odyssey Intel Overlay official API v1");
-    private const string LauncherVersion = "2.1.0";
+    private const string LauncherVersion = "2.2.0";
     private const string ApiOrigin = "https://steamapi.stellarodyssey.app";
     private const int MaximumApiBytes = 32 * 1024 * 1024;
     private readonly object gate = new object();
@@ -521,6 +521,9 @@ internal sealed class OfficialApiBridge : IDisposable
     private readonly int devToolsPort;
     private readonly string storageDirectory;
     private readonly string keyPath;
+    private readonly PerfectNodeIndex perfectIndex;
+    private readonly object requestGate = new object();
+    private DateTime nextRequestUtc = DateTime.MinValue;
     private volatile bool stopping;
 
     private OfficialApiBridge(int port, string sessionToken, int gamePort)
@@ -529,6 +532,7 @@ internal sealed class OfficialApiBridge : IDisposable
         devToolsPort = gamePort;
         storageDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Stellar Odyssey Intel Overlay");
         keyPath = Path.Combine(storageDirectory, "official-api-key.bin");
+        perfectIndex = new PerfectNodeIndex(storageDirectory, ReadKey, ThrottleOfficialRequest);
         listener = new TcpListener(IPAddress.Loopback, port);
     }
 
@@ -638,6 +642,7 @@ internal sealed class OfficialApiBridge : IDisposable
                 WriteJson(context, 200, new Dictionary<string, object> { { "ok", true } });
                 StopListening();
             }
+            else if (path == "/official/systems" && context.Request.HttpMethod == "GET") WriteJson(context, 200, perfectIndex.Snapshot());
             else if (path.StartsWith("/official/", StringComparison.Ordinal) && context.Request.HttpMethod == "GET") ProxyOfficial(context, path.Substring(10));
             else WriteJson(context, 404, new Dictionary<string, object> { { "ok", false }, { "error", "Unknown local helper route" } });
         }
@@ -668,6 +673,7 @@ internal sealed class OfficialApiBridge : IDisposable
             { "configured", File.Exists(keyPath) },
             { "launcherVersion", LauncherVersion },
             { "nativeAlerts", true },
+            { "perfectIndex", true },
             { "storage", "Windows DPAPI (current user)" },
             { "caches", caches },
         });
@@ -782,6 +788,7 @@ internal sealed class OfficialApiBridge : IDisposable
         {
             Directory.CreateDirectory(storageDirectory);
             WriteProtected(keyPath, Encoding.UTF8.GetBytes(key));
+            perfectIndex.Reset();
             foreach (var route in new[] { "user", "journal", "stations", "market", "dungeons", "solodungeons", "activerunes" })
             {
                 var cachePath = CachePath(route);
@@ -796,6 +803,7 @@ internal sealed class OfficialApiBridge : IDisposable
         lock (gate)
         {
             if (File.Exists(keyPath)) File.Delete(keyPath);
+            perfectIndex.Reset();
             foreach (var route in new[] { "user", "journal", "stations", "market", "dungeons", "solodungeons", "activerunes" })
             {
                 var cachePath = CachePath(route);
@@ -803,6 +811,16 @@ internal sealed class OfficialApiBridge : IDisposable
             }
         }
         WriteJson(context, 200, new Dictionary<string, object> { { "ok", true }, { "configured", false } });
+    }
+
+    private void ThrottleOfficialRequest()
+    {
+        lock (requestGate)
+        {
+            var wait = nextRequestUtc - DateTime.UtcNow;
+            if (wait.TotalMilliseconds > 0) Thread.Sleep((int)Math.Ceiling(wait.TotalMilliseconds));
+            nextRequestUtc = DateTime.UtcNow.AddMilliseconds(300);
+        }
     }
 
     private void ProxyOfficial(LocalContext context, string route)
@@ -841,6 +859,7 @@ internal sealed class OfficialApiBridge : IDisposable
 
             try
             {
+                ThrottleOfficialRequest();
                 var request = WebRequest.CreateHttp(ApiOrigin + "/api/public/" + route);
                 request.Method = "GET";
                 request.Proxy = null;
@@ -1107,6 +1126,7 @@ internal sealed class OfficialApiBridge : IDisposable
     {
         if (stopping) return;
         stopping = true;
+        perfectIndex.Stop();
         try { listener.Stop(); }
         catch { }
     }

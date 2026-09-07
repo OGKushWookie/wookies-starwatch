@@ -16,6 +16,8 @@ The launcher is not commercially code-signed, so Windows may identify it as an u
 
 ## Optional account features
 
+Launcher 2.2.0 adds **Nodes → Nearest perfect nodes**. Add your official API key in Sync, choose a resource type, and the nearest ten exact 100% matches update as your position changes. The public map is processed in the background and cached hourly. Results do not increase your personal travel count. Exit an older Starwatch tray process before starting this new EXE.
+
 - **Steam linking:** Open Sync, read and accept the shared-data notice, then select **Connect with Steam**. This carries favorites, account map discoveries, and pooled observations across PCs.
 - **Official read-only API:** Paste the key from your own in-game profile once per PC. It remains Windows-encrypted locally and is separate from Steam linking.
 - **Battle contribution:** Off by default. Enable it separately only if you want completed Arena/Squadron evidence already loaded by the game to contribute to the anonymous model.

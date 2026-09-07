@@ -37,7 +37,7 @@ assert(overlay.includes("battleSharing: saved.sync?.battleSharing === true"), "N
 assert(overlay.includes('data-action="privacy-consent"'), "Shared-data consent control is missing");
 assert(overlay.includes('data-action="diagnostic-copy"'), "Privacy-safe diagnostics control is missing");
 assert(worker.includes('url.pathname === "/v1/account/delete"'), "Authenticated cloud deletion route is missing");
-assert(portableLauncher.includes('internal const string Version = "2.1.0"'), "Portable launcher version is not 2.1.0");
+assert(portableLauncher.includes('internal const string Version = "2.2.0"'), "Portable launcher version is not 2.2.0");
 assert(portableLauncher.includes("DispatchNativeAlerts"), "Portable background alert dispatcher is missing");
 assert(injector.includes('path == "/alert/schedule"'), "Native alert scheduling route is missing");
 assert(portableLauncher.includes('WookiesStarwatch.overlay.js'), "Portable launcher embedded fallback is missing");

@@ -38,7 +38,8 @@ $arguments = @(
     '/reference:System.Web.Extensions.dll',
     '/reference:System.Windows.Forms.dll',
     (Join-Path $sourceDirectory 'PortableLauncher.cs'),
-    (Join-Path $sourceDirectory 'Injector.cs')
+    (Join-Path $sourceDirectory 'Injector.cs'),
+    (Join-Path $sourceDirectory 'PerfectNodeIndex.cs')
 )
 
 & $compiler $arguments

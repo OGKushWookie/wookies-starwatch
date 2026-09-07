@@ -1,12 +1,14 @@
 # Privacy Notice — Private Beta
 
-Wookie's Starwatch 1.9.3 is an unofficial, informational companion for Stellar Odyssey. Local-only features work without shared sync. Shared sync and completed-battle contribution are optional.
+Wookie's Starwatch 1.10.0 is an unofficial, informational companion for Stellar Odyssey. Local-only features work without shared sync. Shared sync and completed-battle contribution are optional.
 
 ## Stored on this PC
 
 The overlay stores its preferences and passive observations in the game renderer's browser storage. This can include favorites, profiles the game already loaded, XP/RSS snapshots, system coordinates, confirmed 100% nodes, routes, market settings, and simulator presets. Launcher 2.1.0 also keeps a small local queue of pending alert IDs, titles, messages, due times, expirations, and selected notification channels; it contains no game credentials and is cleared when Stellar Odyssey closes.
 
 If an official API key is entered, the launcher encrypts it and minimized response caches with Windows DPAPI for the current Windows user under the pre-rebrand compatibility path `%LOCALAPPDATA%\Stellar Odyssey Intel Overlay`. The key is not placed in browser storage or sent to the companion database.
+
+Launcher 2.2.0 also stores a compact, Windows-encrypted public perfect-node index at `perfect-node-index.bin`. It contains public system names, coordinates, perfect-node resource/body types, counts, and cache metadata. The complete public galaxy is streamed and discarded during processing. The public index is not uploaded to the companion database and does not become personal travel history. Removing or replacing the API key clears this index; temporary API failures retain the last usable snapshot with a stale-data notice.
 
 ## Stored by the companion service
 

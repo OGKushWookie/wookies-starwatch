@@ -4,6 +4,7 @@
 
 - Run JavaScript syntax checks for `overlay.js` and `Sync Service/src/index.js`.
 - Build `WookiesStarwatch.exe` with `Source/Build-Portable.ps1` and require its embedded-overlay self-test to pass.
+- Run `Source/Test-PerfectIndex.ps1` and `Sync Service/test/perfect-finder.mjs`. Confirm the native helper returns compact cached results quickly while a cold index rebuild continues in the background.
 - Confirm the overlay version, signed manifest version, update asset name, and SHA-256 are identical.
 - Verify the distributable excludes the private RSA signing key, Cloudflare local state, dependency folders, and credentials.
 - Test the one-file launcher from a clean folder with no adjacent `overlay.js`: before the game, while the game is open, and across a renderer restart.

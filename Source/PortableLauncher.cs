@@ -21,12 +21,12 @@ using Microsoft.Win32;
 [assembly: AssemblyDescription("Informational companion overlay launcher for Stellar Odyssey")]
 [assembly: AssemblyCompany("Wookie's Starwatch community project")]
 [assembly: AssemblyProduct("Wookie's Starwatch")]
-[assembly: AssemblyVersion("2.1.0.0")]
-[assembly: AssemblyFileVersion("2.1.0.0")]
+[assembly: AssemblyVersion("2.2.0.0")]
+[assembly: AssemblyFileVersion("2.2.0.0")]
 
 internal static class PortableLauncher
 {
-    internal const string Version = "2.1.0";
+    internal const string Version = "2.2.0";
     private const string InstanceName = "Local\\StellarOdysseyIntelOverlayLauncher";
     private const string OpenSignalName = "Local\\StellarOdysseyIntelOverlayOpen";
     private const string LicenseResourceName = "WookiesStarwatch.LICENSE.txt";
@@ -553,11 +553,12 @@ internal static class PortableGame
         };
         var expression = "(async function(){" +
             "var desired=" + Json.Serialize(package.Version.ToString()) + ";" +
+            "var desiredHash=" + Json.Serialize(package.Hash) + ";" +
             "var existing=window.__stellarOdysseyIntelOverlay;" +
             "window.__soIntelNativeBridge=" + Json.Serialize(nativeBridge) + ";" +
-            "if(existing&&existing.version===desired){if(" + (forceOpen ? "true" : "false") + "&&typeof existing.show==='function')existing.show();return {ok:true,reused:true,version:desired};}" +
+            "if(existing&&existing.version===desired&&window.__soIntelOverlayHash===desiredHash){if(" + (forceOpen ? "true" : "false") + "&&typeof existing.show==='function')existing.show();return {ok:true,reused:true,version:desired};}" +
             "if(existing&&typeof existing.destroy==='function')existing.destroy();" +
-            "return await (0,eval)(" + Json.Serialize(package.Source) + ");" +
+            "var result=await (0,eval)(" + Json.Serialize(package.Source) + ");window.__soIntelOverlayHash=desiredHash;return result;" +
             "})()";
         Evaluate(socketUrl, expression);
     }

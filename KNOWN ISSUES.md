@@ -1,4 +1,9 @@
-# Known Issues — Wookie's Starwatch 1.9.3 / Launcher 2.1.0 Private Beta
+# Known Issues — Wookie's Starwatch 1.10.0 / Launcher 2.2.0 Private Beta
+
+- Public nearest-perfect search requires launcher 2.2.0 and a locally configured official API key. Owner-hidden systems are excluded. The public feed provides only the main galaxy (Z 1); other layers use personal observations only. New discoveries can take until the next hourly refresh to appear.
+- Nearest means straight-line coordinate distance, not the fastest portal-assisted journey. Select Plan route for fuel/cooldown/portal comparisons.
+- The public index is processed off the renderer on a low-priority native thread. A first download still uses network and CPU briefly; only the compact index is kept. The renderer caches sorting and draws glows only for loaded systems.
+- Journal paging is not used yet. The existing full-history journal request remains bounded by the helper's 32 MiB general-feed limit; exceptionally large personal journals may still need paging support in a future release.
 
 - The Windows launcher is not commercially code-signed. SmartScreen may show an unknown-publisher warning, and Smart App Control can block it. Verify the release checksum; do not disable antivirus protection.
 - The overlay currently supports the Windows Steam/Electron build. Launcher 2.1.0 monitors the game from the notification area and normally reinjects automatically after the game or renderer restarts.

@@ -1,6 +1,16 @@
 # Wookie's Starwatch
 
-Overlay 1.9.3 / portable launcher 2.1.0 private beta — unofficial, display-only companion for the Steam/Electron build of Stellar Odyssey.
+Overlay 1.10.0 / portable launcher 2.2.0 private beta — unofficial, display-only companion for the Steam/Electron build of Stellar Odyssey.
+
+## Nearest public perfect nodes
+
+In **Nodes**, choose Rocky, Icy, Gas, Crystal, or All resources to see the nearest ten matching systems with exact 100% nodes. The list follows the live player position after a jump or teleport, without opening the game map. Select **Plan route** for the existing fuel/cooldown/portal-aware itinerary. A personal official API key is required once per PC; Steam linking is not required for the public index.
+
+Launcher 2.2.0 streams the gzip-compressed `/api/public/systems` feed on a native background thread, discards non-perfect records, and atomically saves a Windows-encrypted compact index. It uses ETags, refreshes at most hourly, preserves cached results on failure, and honors the daily reset after a quota response. The full response never enters the game renderer or personal cloud sync. Gold map glows are limited to already loaded coordinates. Public results are main-galaxy (Z 1) records; hidden systems are absent.
+
+Publicly mapped systems remain distinct from personal systems seen. Journal bodies now feed the personal perfect-node observations, with journal `date` correctly interpreted as milliseconds. The default complete journal is still used; this release does not walk paginated journal history.
+
+Upgrading from 2.1.0 requires replacing the EXE once, because the native API helper changed. Existing local API keys, Steam links, settings, and favorites are preserved.
 
 This is a private-beta build for a small trusted test group. Read `PRIVACY.md` and `KNOWN ISSUES.md` before enabling shared sync. The launcher is not yet commercially code-signed; verify the supplied SHA-256 checksums rather than disabling Windows security software.
 
@@ -117,7 +127,7 @@ The launcher checks that companion host when it starts and no more than once eve
 
 Cooldown notifications are informational only. They observe the visible client countdown and never activate the engine or initiate travel. Desktop notifications are disabled by default and can be enabled through the Alerts tab. Launcher 2.1.0 delivers them through its Windows notification-area process without browser permission; Windows Focus Assist or system notification settings can still suppress a banner.
 
-“Scan” is intentionally passive: to expand the resource-node index, pan the game's native galaxy map yourself. The official journal can fill visited coordinates and jump totals, but it does not include planet bodies or node quality; golden 100% halos therefore still require passively loaded native map data. Other players are never requested through the official account endpoint.
+Personal map observations are passive. The updated official journal also supplies visited coordinates and body/node quality. Launcher 2.2.0 independently builds a global perfect-node index from the official public systems feed; it does not mark those public systems personally visited. Golden 100% halos are drawn only at coordinates already loaded on the native map. Other players are never requested through the official account endpoint.
 
 XP and RSS-rate tracking are passive. Your own loaded totals are sampled locally; another player requires normally loaded public-profile observations. With Sync enabled, those observations can come from different participating overlay users. XP wall-clock rates need at least 10 minutes and include idle/offline gaps. Active-session XP needs at least three positive adjacent intervals, no more than ten minutes apart, totaling at least ten minutes; it excludes unchanged, skipped-level, and extreme outlier intervals. Sparse profiles therefore calibrate rather than pretending their active playtime is known. RSS remains a wall-clock calculation from cumulative profile totals and requires at least 60 minutes.
 
