@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node test/release-static.mjs && node test/perfect-finder.mjs",
+    "test": "node test/release-static.mjs && node test/perfect-finder.mjs && node test/panel-refresh.mjs",
     "dev": "wrangler dev",
     "db:create": "wrangler d1 create stellar-odyssey-intel-sync",
     "db:migrate:local": "wrangler d1 migrations apply stellar-odyssey-intel-sync --local",

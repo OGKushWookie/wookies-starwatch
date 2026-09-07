@@ -18,6 +18,7 @@ jobs:
         run: |
           node "Sync Service/test/release-static.mjs"
           node "Sync Service/test/perfect-finder.mjs"
+          node "Sync Service/test/panel-refresh.mjs"
       - name: Test streaming perfect-node index
         shell: pwsh
         run: ./Source/Test-PerfectIndex.ps1 -OutputDirectory ./test-artifacts
