@@ -1,4 +1,8 @@
-# Known Issues — Wookie's Starwatch 1.10.0 / Launcher 2.2.0 Private Beta
+# Known Issues — Wookie's Starwatch 1.11.0 / Launcher 2.2.0 Private Beta
+
+- Dust Atlas colors show the distance contribution to base discovery dust, not personalized net payout. Bonus stacking, tax and server rounding are not modeled. The atlas covers Steam Z 1 only.
+- Dust totals need observed star type and full body count. This release uses already-loaded game data and existing journal/user feeds, not a second full public catalogue. Oldest local metadata is evicted beyond 6,000 records.
+- Coordinates without cached data are unverified, not guaranteed undiscovered. Known systems do not offer repeat discovery rewards; public-feed omissions can include hidden systems.
 
 - Public nearest-perfect search requires launcher 2.2.0 and a locally configured official API key. Owner-hidden systems are excluded. The public feed provides only the main galaxy (Z 1); other layers use personal observations only. New discoveries can take until the next hourly refresh to appear.
 - Nearest means straight-line coordinate distance, not the fastest portal-assisted journey. Select Plan route for fuel/cooldown/portal comparisons.

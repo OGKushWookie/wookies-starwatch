@@ -24,6 +24,8 @@ The service never receives Steam passwords, game cookies, game session credentia
 
 ## Retention
 
+The Dust Atlas keeps up to 6,000 compact local records containing game-system coordinates, star type, body count and system name, plus the last inspected coordinate/view. These come from data already loaded by normal gameplay or existing official feeds. Dust-specific records and selections are not uploaded to the companion service. The heatmap is generated locally and triggers no additional game/API requests. Clear overlay cache removes these browser-stored records.
+
 Raw XP, RSS, and profile history is kept for seven days and then compacted into hourly/lifetime summaries. Latest public-profile/player summaries and compact historical aggregates are kept for analytics. Battle observations are retained for model development unless their reporting account is deleted. Local devices keep their own cache until it is cleared.
 
 ## Your controls

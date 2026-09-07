@@ -1,8 +1,8 @@
 {
-  "version": "1.10.1",
-  "overlayUrl": "https://stellar-odyssey-intel-sync.sthess28.workers.dev/updates/overlay-1.10.1.js",
-  "sha256": "E0F69B9B7EED8B3800E73049F7CBB107B83E750DA0EE5536BB797042F28A813A",
+  "version": "1.11.0",
+  "overlayUrl": "https://stellar-odyssey-intel-sync.sthess28.workers.dev/updates/overlay-1.11.0.js",
+  "sha256": "BCD1980D245107C28C6F5F40BDDD8801535D12E96CF1BF818B69FF65C634FDFB",
   "minimumLauncherVersion": "2.2.0",
-  "publishedAt": "2026-09-07T20:02:07Z",
-  "signature": "XkPctf6yDBNWeDdm2sAE36NacZ++w+Tcdcp6z7M356Nhsy6NTXAx7jfmXANKCY2BeZsF6Mki9q8p1uUoqcNxjrxoNIcgNtCs/ditL0byeafgGD85j2S0ayVo1P7jpfmi+RAAiN1Wlqo+AOe6PHRy5q//V93/loaFzGctGQr6+YZQbEW7zmxWQQIGfg62UFtVF+sjk4eDqoxFme7qMFowBPfThZmaeCTZ7wr6HzGgKGmQc+Z+i8C+cuBTHRyOYWreOmPkSG+63YrGDJrMY/g2uWPeOHk1amfE/8+PZb9kyF1vvu9QIKsaTK0GLum2EuDu7c+lWSsfabtV6pfglQ3nrA=="
+  "publishedAt": "2026-09-07T22:46:01Z",
+  "signature": "YF8tPw0zrobNSGQHwdM4uw8gd31cPaNg/mxryjrOAhR5DIzgFLOQZVYH8+6dEre4ZNt4zJCr77J4V+NSeyXvORuvlpsgPpHsPHMA2B15ST4yynU5va+lkT8QOHWxp/tm0XJtjmOo6BQaTv20axKvxK70ZrVb2Aalxi3owySljqR1r/JHvME+ziKeKvXyZq9ED9DKtCEnarRYlEhDcNoA6f9PLao4tGIYQ0AyfWtgc4ColajFZrDIbNH5Q0lyFrcqX7EAizKvU+O4ifHawdopjwy2NpJxXAZgiOjfBgDmdxen4NzZASp4SFnPI9CiTNsnST41u7lPvlrstp13YGcfLA=="
 }

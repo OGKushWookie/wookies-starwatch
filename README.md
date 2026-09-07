@@ -1,6 +1,18 @@
 # Wookie's Starwatch
 
-Overlay 1.10.0 / portable launcher 2.2.0 private beta — unofficial, display-only companion for the Steam/Electron build of Stellar Odyssey.
+Overlay 1.11.0 / portable launcher 2.2.0 private beta — unofficial, display-only companion for the Steam/Electron build of Stellar Odyssey.
+
+## Base discovery dust heatmap
+
+Open **Dust** for a separate, local heatmap of the Steam main galaxy. Galaxy, Region, and Local change the scale around the selected coordinate; **My location** centers your current Z-1 position. Click the map, use its arrow keys (Shift moves ten coordinates), or enter exact X/Y coordinates to inspect a point. **Plan route** hands the selected coordinate to the existing manual route planner; it never travels.
+
+Color represents the distance term only: `10 × distance in coordinate units to the nearest starter`. The fixed 0–19,000 display scale stays the same at every zoom and is not a reward cap. The installed wiki documents `base dust = star value + 20 × body count + nearest-starter distance in LY`. The inspector shows that full base value when complete star/body metadata has been observed. Missing fields remain unknown, not zero. Player bonuses, tax and server rounding are not modeled.
+
+Known systems are labeled as already known, not repeatable discovery rewards. Other coordinates are **unverified**: they may already be discovered or hidden. The heatmap does not prove a fresh discovery is available. Its distance layer works without an API key. Star/body details come from already-loaded game views and the existing personal journal/user feed; this release does **not** download a second full public catalogue or retain every public system from the perfect-node feed.
+
+Raster work is lazy, chunked and cached, and runs only while the Dust tab is visible. It does not modify the game map, draw extra markers there, make additional API calls, or upload dust data. Up to 6,000 compact observed star/body records and the selected view are kept locally, evicting the oldest records at the bound. The canvas and coordinate drafts stay stable through background refreshes.
+
+Overlay 1.11.0 is a signed automatic update for launcher 2.2.0; no launcher replacement is required.
 
 ## Nearest public perfect nodes
 
