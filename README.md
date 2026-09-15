@@ -1,6 +1,12 @@
 # Wookie's Starwatch
 
-Overlay 1.11.0 / portable launcher 2.2.0 private beta — unofficial, display-only companion for the Steam/Electron build of Stellar Odyssey.
+Overlay 1.11.1 / portable launcher 2.2.0 private beta — unofficial, display-only companion for the Steam/Electron build of Stellar Odyssey.
+
+## PvM compatibility repair
+
+Overlay 1.11.1 restores the NPC comparison, maximum-level scan, and stat optimizer after the September game update. The lab now reads the installed Steam client's local entry bundle to identify its shared simulator export instead of assuming a minified alias. It checks the simulator interface before use, caches a successful load, and permits retry after a failed load. Unknown bundle formats fail with a compatibility message; the resolver never probes arbitrary game functions or downloads game-server code. Predictions from a different game bundle are cleared while editable builds are preserved. This remains a local, informational simulator, not a guarantee of server battle outcomes.
+
+This overlay-only update works with launcher 2.2.0; a replacement EXE is not required.
 
 ## Base discovery dust heatmap
 

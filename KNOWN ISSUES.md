@@ -1,4 +1,4 @@
-# Known Issues — Wookie's Starwatch 1.11.0 / Launcher 2.2.0 Private Beta
+# Known Issues — Wookie's Starwatch 1.11.1 / Launcher 2.2.0 Private Beta
 
 - Dust Atlas colors show the distance contribution to base discovery dust, not personalized net payout. Bonus stacking, tax and server rounding are not modeled. The atlas covers Steam Z 1 only.
 - Dust totals need observed star type and full body count. This release uses already-loaded game data and existing journal/user feeds, not a second full public catalogue. Oldest local metadata is evicted beyond 6,000 records.
@@ -13,7 +13,7 @@
 - The overlay currently supports the Windows Steam/Electron build. Launcher 2.1.0 monitors the game from the notification area and normally reinjects automatically after the game or renderer restarts.
 - Background engine alerts require the map countdown to be observed once for that cooldown and `WookiesStarwatch.exe` to remain running in the Windows notification area. Focus Assist, Do Not Disturb, or disabled app notifications can hide a desktop banner; audio and taskbar attention remain separate selected channels.
 - The launcher EXE does not replace itself. Ordinary signed overlay code updates are automatic; changes to native launcher behavior or the official-API allow-list require downloading a newer EXE.
-- A game-client update can rename internal stores or simulator exports. The overlay fails closed where possible, but profiles, map decorations, or the NPC lab may temporarily become unavailable.
+- A game-client update can rename internal stores or change bundle formats. The NPC lab resolves renamed simulator exports from the installed local bundle, but an unfamiliar wrapper or interface still requires a compatibility update. Profiles or map decorations can also temporarily become unavailable after game updates.
 - Public-player data is passive. Missing gear, catalysts, locations, or rates stay blank until normal gameplay exposes the relevant profile or location.
 - XP/RSS estimates require elapsed history. Active XP needs repeated continuous gain intervals; RSS needs at least an hour. Sparse players remain calibrating.
 - PvP predictions are experimental. Hidden opponent bonuses and server RNG cannot be reconstructed exactly; confidence should improve as opted-in battle evidence grows.
